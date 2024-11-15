@@ -1,0 +1,19 @@
+version: "3.4"
+services:
+  logstash:
+    image: logstash:7.2.0
+    environment:
+      - LOGSTASH_LOG_LEVEL=debug
+    container_name: logstash
+    restart: always
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - 4560:4560
+      - 4561:4561
+      - 4562:4562
+    networks:
+      - net-lt
+networks:
+  net-lt:
+    driver: bridge

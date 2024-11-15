@@ -1,0 +1,102 @@
+version: '3'
+services:
+  redis-6371:
+    image: m.daocloud.io/docker.io/redis:6.2.5
+    container_name: redis-6371
+    restart: always
+    environment:
+      MSG: "hello"
+    networks:
+      redis:
+        ipv4_address: "10.20.10.11" #固定ip，因为从库在连接master的时候，需要设置host
+    volumes:
+      - ./data/redis/redis-cluster/6371/conf/redis.conf:/usr/local/etc/redis/redis.conf 
+      - ./data/redis/redis-cluster/6371/data:/data 
+    ports:
+      - "6371:6371"
+      - "16371:16371"
+  redis-6372:
+    image: m.daocloud.io/docker.io/redis:6.2.5
+    container_name: redis-6372
+    restart: always
+    environment:
+      MSG: "hello"
+    networks:
+      redis:
+        ipv4_address: "10.20.10.12" #固定ip，因为从库在连接master的时候，需要设置host
+    volumes:
+      - ./data/redis/redis-cluster/6372/conf/redis.conf:/usr/local/etc/redis/redis.conf 
+      - ./data/redis/redis-cluster/6372/data:/data 
+    ports:
+      - "6372:6372"
+      - "16372:16372"
+  redis-6373:
+    image: m.daocloud.io/docker.io/redis:6.2.5
+    container_name: redis-6373
+    restart: always
+    environment:
+      MSG: "hello"
+    networks:
+      redis:
+        ipv4_address: "10.20.10.13" #固定ip，因为从库在连接master的时候，需要设置host
+    volumes:
+      - ./data/redis/redis-cluster/6373/conf/redis.conf:/usr/local/etc/redis/redis.conf 
+      - ./data/redis/redis-cluster/6373/data:/data 
+    ports:
+      - "6373:6373"
+      - "16373:16373"
+  redis-6374:
+    image: m.daocloud.io/docker.io/redis:6.2.5
+    container_name: redis-6374
+    restart: always
+    environment:
+      MSG: "hello"
+    networks:
+      redis:
+        ipv4_address: "10.20.10.14" #固定ip，因为从库在连接master的时候，需要设置host
+    volumes:
+      - ./data/redis/redis-cluster/6374/conf/redis.conf:/usr/local/etc/redis/redis.conf 
+      - ./data/redis/redis-cluster/6374/data:/data 
+    ports:
+      - "6374:6374"
+      - "16374:16374"
+  redis-6375:
+    image: m.daocloud.io/docker.io/redis:6.2.5
+    container_name: redis-6375
+    restart: always
+    environment:
+      MSG: "hello"
+    networks:
+      redis:
+        ipv4_address: "10.20.10.15" #固定ip，因为从库在连接master的时候，需要设置host
+    volumes:
+      - ./data/redis/redis-cluster/6375/conf/redis.conf:/usr/local/etc/redis/redis.conf 
+      - ./data/redis/redis-cluster/6375/data:/data 
+    ports:
+      - "6375:6375"
+      - "16375:16375"
+  redis-6376:
+    image: m.daocloud.io/docker.io/redis:6.2.5
+    container_name: redis-6376
+    restart: always
+    environment:
+      MSG: "hello"
+    networks:
+      redis:
+        ipv4_address: "10.20.10.16" #固定ip，因为从库在连接master的时候，需要设置host
+    volumes:
+      - ./data/redis/redis-cluster/6376/conf/redis.conf:/usr/local/etc/redis/redis.conf 
+      - ./data/redis/redis-cluster/6376/data:/data 
+    ports:
+      - "6376:6376"
+      - "16376:16376"
+  
+
+  
+networks:
+  redis:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: "10.20.0.0/16"

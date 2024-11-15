@@ -1,0 +1,18 @@
+version: "3.4"
+services:
+  kibana:
+    image: kibana:7.2.0
+    container_name: kibana
+    restart: always
+    environment:
+      - SERVER_HOST="0.0.0.0"
+      - ELASTICSEARCH_HOSTS=["http://192.168.123.81:9200","http://192.168.123.81:9201","http://192.168.123.81:9202"]
+      - ELASTICSEARCH_USERNAME="elastic"
+      - ELASTICSEARCH_PASSWORD="gTNcIwzB52DLlF9XBpCT"
+    ports:
+      - "5601:5601"
+    networks:
+      - net-kb
+networks:
+  net-kb:
+    driver: bridge
