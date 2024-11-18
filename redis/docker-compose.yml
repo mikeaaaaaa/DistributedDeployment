@@ -7,11 +7,11 @@ services:
     environment:
       MSG: "hello"
     networks:
-      redis:
-        ipv4_address: "10.20.10.11" #固定ip，因为从库在连接master的时候，需要设置host
+      - redis
     volumes:
-      - ./data/redis/redis-cluster/6371/conf/redis.conf:/usr/local/etc/redis/redis.conf 
-      - ./data/redis/redis-cluster/6371/data:/data 
+      - ./data/redis/redis-cluster/6371/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data/redis/redis-cluster/6371/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
     ports:
       - "6371:6371"
       - "16371:16371"
@@ -22,11 +22,11 @@ services:
     environment:
       MSG: "hello"
     networks:
-      redis:
-        ipv4_address: "10.20.10.12" #固定ip，因为从库在连接master的时候，需要设置host
+      - redis
     volumes:
-      - ./data/redis/redis-cluster/6372/conf/redis.conf:/usr/local/etc/redis/redis.conf 
-      - ./data/redis/redis-cluster/6372/data:/data 
+      - ./data/redis/redis-cluster/6372/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data/redis/redis-cluster/6372/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
     ports:
       - "6372:6372"
       - "16372:16372"
@@ -37,11 +37,11 @@ services:
     environment:
       MSG: "hello"
     networks:
-      redis:
-        ipv4_address: "10.20.10.13" #固定ip，因为从库在连接master的时候，需要设置host
+      - redis
     volumes:
-      - ./data/redis/redis-cluster/6373/conf/redis.conf:/usr/local/etc/redis/redis.conf 
-      - ./data/redis/redis-cluster/6373/data:/data 
+      - ./data/redis/redis-cluster/6373/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data/redis/redis-cluster/6373/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
     ports:
       - "6373:6373"
       - "16373:16373"
@@ -53,10 +53,11 @@ services:
       MSG: "hello"
     networks:
       redis:
-        ipv4_address: "10.20.10.14" #固定ip，因为从库在连接master的时候，需要设置host
+        ipv4_address: "10.20.10.14"
     volumes:
-      - ./data/redis/redis-cluster/6374/conf/redis.conf:/usr/local/etc/redis/redis.conf 
-      - ./data/redis/redis-cluster/6374/data:/data 
+      - ./data/redis/redis-cluster/6374/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data/redis/redis-cluster/6374/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
     ports:
       - "6374:6374"
       - "16374:16374"
@@ -67,11 +68,11 @@ services:
     environment:
       MSG: "hello"
     networks:
-      redis:
-        ipv4_address: "10.20.10.15" #固定ip，因为从库在连接master的时候，需要设置host
+      - redis
     volumes:
-      - ./data/redis/redis-cluster/6375/conf/redis.conf:/usr/local/etc/redis/redis.conf 
-      - ./data/redis/redis-cluster/6375/data:/data 
+      - ./data/redis/redis-cluster/6375/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data/redis/redis-cluster/6375/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
     ports:
       - "6375:6375"
       - "16375:16375"
@@ -82,21 +83,19 @@ services:
     environment:
       MSG: "hello"
     networks:
-      redis:
-        ipv4_address: "10.20.10.16" #固定ip，因为从库在连接master的时候，需要设置host
+      - redis
     volumes:
-      - ./data/redis/redis-cluster/6376/conf/redis.conf:/usr/local/etc/redis/redis.conf 
-      - ./data/redis/redis-cluster/6376/data:/data 
+      - ./data/redis/redis-cluster/6376/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data/redis/redis-cluster/6376/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
     ports:
       - "6376:6376"
       - "16376:16376"
-  
 
-  
 networks:
   redis:
     driver: bridge
     ipam:
       driver: default
       config:
-      - subnet: "10.20.0.0/16"
+        - subnet: "10.20.0.0/16"

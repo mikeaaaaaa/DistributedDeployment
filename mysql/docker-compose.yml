@@ -15,15 +15,15 @@ services:
       mysql:
         ipv4_address: "10.10.10.10" #固定ip，因为从库在连接master的时候，需要设置host
     volumes:
-    - ./init/master:/docker-entrypoint-initdb.d #挂载master脚本
+      - ./init/master:/docker-entrypoint-initdb.d #挂载master脚本
     ports:
       - "33306:3306"
     command:
-    -  "--server-id=1"
-    -  "--character-set-server=utf8mb4"
-    -  "--collation-server=utf8mb4_unicode_ci"
-    -  "--log-bin=mysql-bin"
-    -  "--sync_binlog=1"
+      - "--server-id=1"
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+      - "--log-bin=mysql-bin"
+      - "--sync_binlog=1"
   mysql-slave1:
     image: m.daocloud.io/docker.io/mysql:8.0.13
     container_name: mysql-slave1
@@ -38,13 +38,13 @@ services:
     ports:
       - "33307:3306"
     networks:
-    - mysql
+      - mysql
     volumes:
-    - ./init/slave:/docker-entrypoint-initdb.d #挂载slave脚本
+      - ./init/slave:/docker-entrypoint-initdb.d #挂载slave脚本
     command:
-    -  "--server-id=2"
-    -  "--character-set-server=utf8mb4"
-    -  "--collation-server=utf8mb4_unicode_ci"
+      - "--server-id=2"
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
   mysql-slave2:
     image: m.daocloud.io/docker.io/mysql:8.0.13
     container_name: mysql-slave2
@@ -59,17 +59,18 @@ services:
     ports:
       - "33308:3306"
     networks:
-    - mysql
+      - mysql
     volumes:
-    - ./init/slave:/docker-entrypoint-initdb.d
-    command: #这里需要修改server-id，保证每个mysql容器的server-id都不一样
-    -  "--server-id=3"
-    -  "--character-set-server=utf8mb4"
-    -  "--collation-server=utf8mb4_unicode_ci"
+      - ./init/slave:/docker-entrypoint-initdb.d
+    command:
+      #这里需要修改server-id，保证每个mysql容器的server-id都不一样
+      - "--server-id=3"
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
 networks:
   mysql:
     driver: bridge
     ipam:
       driver: default
       config:
-      - subnet: "10.10.0.0/16"
+        - subnet: "10.10.0.0/16"

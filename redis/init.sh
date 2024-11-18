@@ -9,9 +9,9 @@ docker compose up -d
 sleep 15
 docker exec -it redis-6371 \
 redis-cli -a 123456 --cluster create \
-10.20.10.11:6371 10.20.10.12:6372 10.20.10.13:6373 4:6374 10.20.10.15:6375 10.20.10.16:6376 \
+192.168.123.81:6371 192.168.123.81:6372 192.168.123.81:6373 192.168.123.81:6374 192.168.123.81:6375 192.168.123.81:6376 \
 --cluster-replicas 1
 sleep 10
 # 测试是否配置成功
 
-docker exec -it redis-6371 redis-cli -a 123456 --cluster redis-6371:6371
+docker exec -it redis-6371 redis-cli -a 123456 --cluster check redis-6371:6371

@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  rabbitmaster:
+    image: rabbitmq:3.8.14-management
+    container_name: rabbitmaster
+    hostname: host_master
+    privileged: true
+    environment:
+      RABBITMQ_NODENAME: rabbit
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: 123456
+      RABBITMQ_ERLANG_COOKIE: rabbitmq_cookie_123
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      - "15674:15674"
+      - "61613:61613"
+    volumes:
+      - ./data/rabbitmq/master/lib:/var/lib/rabbitmq
+      - ./data/rabbitmq/master/log:/var/log/rabbitmq
+    networks:
+      - rabbit
+    # command: >
+    #   bash -c "rabbitmqctl stop_app && rabbitmqctl reset && rabbitmqctl start_app && rabbitmq-plugins enable rabbitmq_stomp && rabbitmq-plugins enable rabbitmq_web_stomp "
+
+  rabbitslave1:
+    image: rabbitmq:3.8.14-management
+    container_name: rabbitslave1
+    hostname: host_slave1
+    privileged: true
+    environment:
+      RABBITMQ_NODENAME: rabbit
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: 123456
+      RABBITMQ_ERLANG_COOKIE: rabbitmq_cookie_123
+    ports:
+      - "6672:5672"
+      - "25672:15672"
+      - "25674:15674"
+      - "61614:61613"
+    volumes:
+      - ./data/rabbitmq/slave1/lib:/var/lib/rabbitmq
+      - ./data/rabbitmq/slave1/log:/var/log/rabbitmq
+    networks:
+      - rabbit
+    depends_on:
+      - rabbitmaster
+    # command: >
+    #   bash -c " sleep 30 && rabbitmqctl stop_app && rabbitmqctl reset && rabbitmqctl join_cluster --ram rabbit@host_master && rabbitmqctl start_app && rabbitmq-plugins enable rabbitmq_stomp && rabbitmq-plugins enable rabbitmq_web_stomp "
+
+  rabbitslave2:
+    image: rabbitmq:3.8.14-management
+    container_name: rabbitslave2
+    hostname: host_slave2
+    privileged: true
+    environment:
+      RABBITMQ_NODENAME: rabbit
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: 123456
+      RABBITMQ_ERLANG_COOKIE: rabbitmq_cookie_123
+    ports:
+      - "7672:5672"
+      - "35672:15672"
+      - "35674:15674"
+      - "61615:61613"
+    volumes:
+      - ./data/rabbitmq/slave2/lib:/var/lib/rabbitmq
+      - ./data/rabbitmq/slave2/log:/var/log/rabbitmq
+    networks:
+      - rabbit
+    depends_on:
+      - rabbitmaster
+      - rabbitslave1
+    # command: >
+    #   bash -c " sleep 60 && rabbitmqctl stop_app && rabbitmqctl reset && rabbitmqctl join_cluster --ram rabbit@host_master && rabbitmqctl start_app && rabbitmq-plugins enable rabbitmq_stomp && rabbitmq-plugins enable rabbitmq_web_stomp && rabbitmqctl cluster_status "
+networks:
+  rabbit:
+    driver: bridge
