@@ -1,0 +1,98 @@
+version: '3.9'
+services:
+  maxwell1:
+    image: xlvchao/maxwell:1.33.0
+    container_name: maxwell1
+    hostname: maxwell1
+    restart: always
+    command: >
+      --log_level=DEBUG 
+      --producer=rabbitmq 
+      --daemon=true 
+      --output_nulls=true 
+      --jdbc_options='autoReconnect=true' 
+      --host 10.0.0.5 
+      --port=3306 
+      --user=root 
+      --password=Pwd@123 
+      --filter='exclude:*.*,include:spartacus.tb_cos_resource,include:spartacus.tb_article,include:spartacus.tb_login_record' 
+      --rabbitmq_host=10.0.0.5 
+      --rabbitmq_port=5672 
+      --rabbitmq_user=root 
+      --rabbitmq_pass=Pwd@123 
+      --rabbitmq_virtual_host=/dev 
+      --rabbitmq_exchange=spartacus 
+      --rabbitmq_exchange_type=topic 
+      --rabbitmq_exchange_durable=true 
+      --rabbitmq_exchange_autodelete=false 
+      --rabbitmq_routing_key_template='%db%.%table%' 
+      --rabbitmq_message_persistent=true 
+      --rabbitmq_declare_exchange=true 
+      --ha 
+      --raft_member_id=A 
+      --jgroups_config=raft.xml
+
+  maxwell2:
+    image: xlvchao/maxwell:1.33.0
+    container_name: maxwell2
+    hostname: maxwell2
+    restart: always
+    command: >
+      --log_level=DEBUG 
+      --producer=rabbitmq 
+      --daemon=true 
+      --output_nulls=true 
+      --jdbc_options='autoReconnect=true' 
+      --host 10.0.0.5 
+      --port=3306 
+      --user=root 
+      --password=Pwd@123 
+      --filter='exclude:*.*,include:spartacus.tb_cos_resource,include:spartacus.tb_article,include:spartacus.tb_login_record' 
+      --rabbitmq_host=10.0.0.5 
+      --rabbitmq_port=5672 
+      --rabbitmq_user=root 
+      --rabbitmq_pass=Pwd@123 
+      --rabbitmq_virtual_host=/dev 
+      --rabbitmq_exchange=spartacus 
+      --rabbitmq_exchange_type=topic 
+      --rabbitmq_exchange_durable=true 
+      --rabbitmq_exchange_autodelete=false 
+      --rabbitmq_routing_key_template='%db%.%table%' 
+      --rabbitmq_message_persistent=true 
+      --rabbitmq_declare_exchange=true 
+      --ha 
+      --raft_member_id=B 
+      --jgroups_config=raft.xml
+
+  maxwell3:
+    image: xlvchao/maxwell:1.33.0
+    container_name: maxwell3
+    hostname: maxwell3
+    restart: always
+    command: >
+      --log_level=DEBUG 
+      --producer=rabbitmq 
+      --daemon=true 
+      --output_nulls=true 
+      --jdbc_options='autoReconnect=true' 
+      --host 10.0.0.5 
+      --port=3306 
+      --user=root 
+      --password=Pwd@123 
+      --filter='exclude:*.*,include:spartacus.tb_cos_resource,include:spartacus.tb_article,include:spartacus.tb_login_record' 
+      --rabbitmq_host=10.0.0.5 
+      --rabbitmq_port=5672 
+      --rabbitmq_user=root 
+      --rabbitmq_pass=Pwd@123 
+      --rabbitmq_virtual_host=/dev 
+      --rabbitmq_exchange=spartacus 
+      --rabbitmq_exchange_type=topic 
+      --rabbitmq_exchange_durable=true 
+      --rabbitmq_exchange_autodelete=false 
+      --rabbitmq_routing_key_template='%db%.%table%' 
+      --rabbitmq_message_persistent=true 
+      --rabbitmq_declare_exchange=true 
+      --ha 
+      --raft_member_id=C 
+      --jgroups_config=raft.xml
+

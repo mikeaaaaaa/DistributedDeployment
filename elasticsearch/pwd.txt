@@ -1,6 +1,6 @@
-apm_system PASSWORD apm_system = DGFpLg1T6rLGMZgm3Z6z 
-kibana PASSWORD kibana = GLc0xKYQKXuYgqxTy8b0 
-logstash_system PASSWORD logstash_system = bkCxTqZis9U3i8mvdOu0 
-beats_system PASSWORD beats_system = Y1hVJu7bTMoOAPRAWZEA 
-remote_monitoring_user PASSWORD remote_monitoring_user = skFb7RaIGmCFEBE9QRnY 
-elastic PASSWORD elastic = gTNcIwzB52DLlF9XBpCT
+apm_system PASSWORD apm_system = 2OWWbwRMDxIJmgu91U1j 
+kibana PASSWORD kibana = vsw7lWRiusi5aXtUiD1n 
+logstash_system PASSWORD logstash_system = IQablTenxl3oSQdxmcF5 
+beats_system PASSWORD beats_system = cOsHC4rMlWxYn7eohe2s 
+remote_monitoring_user PASSWORD remote_monitoring_user = FiGzfU1M4VEVgymBPi4c 
+elastic PASSWORD elastic = B6kUdGhUzmhTxpcJ7RS6
